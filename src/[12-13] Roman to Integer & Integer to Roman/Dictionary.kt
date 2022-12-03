@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException
-
 interface Dictionary<T,R> {
 
     fun search(value: Digit<T>): Digit<*>
