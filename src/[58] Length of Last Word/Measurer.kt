@@ -9,12 +9,8 @@ interface Measurer {
     class Base(private val delimiter: String = " ") : Measurer {
         override fun size(string: String): Int {
             if (string.isEmpty()) return 0
-            val parts = string.split(delimiter)
-            var result = 0
-            parts.forEach {
-                result = if (it.length > result) it.length else result
-            }
-            return result
+            val lastWord = string.trim().split(delimiter).last()
+            return lastWord.length
         }
     }
 }
