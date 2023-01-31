@@ -7,16 +7,13 @@ interface ArrayValidator {
     fun isValid(strings: Array<String>): Boolean
 
     class Base : ArrayValidator {
-        override fun isValid(strings: Array<String>): Boolean {
-            if (strings.size in 1..200){
-                strings.forEach {
-                    if (it.length > 200 || it.contains("[^a-z]*".toRegex()))
-                        return false
-                }
-                return true
-            }
-            return false
-        }
 
+        override fun isValid(strings: Array<String>): Boolean {
+            var result = strings.size in 1..200
+            strings.forEach {
+                result = result && it.contains("^[a-z]*$".toRegex()) && it.length <= 200
+            }
+            return result
+        }
     }
 }

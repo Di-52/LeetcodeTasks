@@ -12,27 +12,30 @@ class ArrayValidatorTest{
     @Test
     fun `test valid`(){
         val input = listOf(
-            arrayOf("car", "cat", "can't"),
+            arrayOf("flower","flow","flight"),
+            arrayOf("dog","racecar","car"),
+            arrayOf("car", "cat", "cant"),
             arrayOf("craft", "fast", "food"),
             arrayOf("health", "count", "read")
         )
         val expected = true
 
         input.forEach {
-            assertEquals(expected, validator.isValid(it))
+            var actual = validator.isValid(it)
+            assertEquals(expected, actual)
         }
     }
 
     @Test
     fun `test invalid`(){
         val input = listOf(
-            arrayOf("cat5", "task2", "1rat"),
-            arrayOf("test$", "cat dog", "front."),
-            arrayOf("React", "New", "Carrot"),
+            arrayOf("cat5", "ta3k", "1rat"),
+            arrayOf("test$", "cat dog", ".front"),
+            arrayOf("React", "newMessage", "CARROT"),
             emptyArray(),
             Array(size = 201) { "" },
             arrayOf(
-                "qazwsxedcrfvtgbyhnuj" +
+                "this string contain more 200 chars" +
                         "qazwsxedcrfvtgbyhnuj" +
                         "qazwsxedcrfvtgbyhnuj" +
                         "qazwsxedcrfvtgbyhnuj" +
