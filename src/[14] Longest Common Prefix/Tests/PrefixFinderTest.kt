@@ -12,6 +12,8 @@ class PrefixFinderTest {
         val arrayValidator = FakeValidator(result = true)
         val finder = PrefixFinder.Base(validator = arrayValidator)
         val input = listOf(
+            arrayOf(""),
+            arrayOf("abab","aba",""),
             arrayOf("flower","flow","flight"),
             arrayOf("car", "cat", "can't"),
             arrayOf("help","head","door","draft","dart"),
@@ -21,6 +23,8 @@ class PrefixFinderTest {
             arrayOf("a")
         )
         val expected = listOf(
+            "",
+            "",
             "fl",
             "ca",
             "",
