@@ -5,40 +5,30 @@
 interface PrefixFinder {
     fun prefix(strings: Array<String>): String
 
-    class Base(private val validator: ArrayValidator):PrefixFinder{
+    class Base(private val validator: ArrayValidator) : PrefixFinder {
 
         override fun prefix(strings: Array<String>): String {
             if (!validator.isValid(strings)) throw IllegalArgumentException()
 
-            var result = mutableMapOf<String,Int>()
-            var prefix: String
+            var founds = 0
+            var index = 0
+            var minLength = 200
 
-            strings.forEach {
-                prefix = it
-                var found = 0
-
-                while (found < 2 && prefix.length > 0)
-                {
+            if (strings[0].isNotEmpty())
+                while (founds == 0) {
+                    var char = strings[0].toCharArray()[index]
                     strings.forEach {
-                        if (it.startsWith(prefix)){
-                            found++
-                        }
+                        if (it.length < minLength) minLength = it.length
+                        if (minLength == 0) return@forEach
+                        if (it.toCharArray()[index] == char) founds++
                     }
-                    if (found == strings.size){
-                        result.put(prefix, found)
-                    }
-                    else{
-                        found =0
-                        prefix = prefix.dropLast(1)
+                    if (founds == strings.size) index++
+                    if (index < minLength && founds == strings.size) {
+                        founds = 0
                     }
                 }
-            }
-            var res = ""
-            var foundCount = 0
-            result.forEach {
-                if (it.value > foundCount) res = it.key
-            }
-            return res
+
+            return if (minLength == 0) "" else strings[0].substring(0..index - 1)
         }
     }
 }
