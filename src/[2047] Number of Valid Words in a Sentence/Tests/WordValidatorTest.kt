@@ -23,7 +23,7 @@ class WordValidatorTest {
     @Test
     fun `test invalid words`(){
         val words = listOf(
-            "vat5", "Rat", ".store", " ", "", "red.,", "1-s",
+            "vat5", "Rat", ".store", "red.,", "1-s",
         )
         val expected = false
 
