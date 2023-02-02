@@ -8,21 +8,21 @@ interface WordValidator {
 
     class Base() : WordValidator {
         override fun isValid(word: String): Boolean {
+            var chars = word.toCharArray()
             var result = true
 
-            val chars = word.toCharArray()
-            if (chars.count { it == '-' } > 1 || chars.last() == '-')
-                result = false
-            if (chars.dropLast(1).count { it == ',' || it == '.' || it == '!' } > 0)
-                result=false
-            if(chars.size > 1 && chars.last() !in 'a'..'z' && chars.dropLast(1).last() !in 'a'..'z')
-                result = false
+            if ((chars.count { it == '-' } > 1) ||
+                (chars.last() == '-') ||
+                (chars.dropLast(1).count { it == ',' || it == '.' || it == '!' } > 0) ||
+                (chars.size > 1 && chars.last() !in 'a'..'z' &&
+                        chars.dropLast(1).last() !in 'a'..'z') ||
+                (chars.size > 1 && chars.first() !in 'a'..'z'))
+                    result = false
+
             chars.forEach {
                 if (!(it in 'a'..'z' || it == '.' || it == ',' || it == '!' || it == '-'))
                     result = false
             }
-            if (chars.size > 1 && chars.first() !in 'a'..'z')
-                result = false
 
             return result
         }
