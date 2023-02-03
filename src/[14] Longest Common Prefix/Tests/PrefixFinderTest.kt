@@ -9,7 +9,7 @@ class PrefixFinderTest {
 
     @Test
     fun `test correct`() {
-        val arrayValidator = FakeValidator(result = true)
+        val arrayValidator = FakeWordValidator(result = true)
         val finder = PrefixFinder.Base(validator = arrayValidator)
         val input = listOf(
             arrayOf(""),
@@ -35,15 +35,15 @@ class PrefixFinderTest {
         )
 
         input.forEachIndexed { index, strings ->
-            var actual: String = finder.prefix(strings)
-            var exp: String = expected[index]
+            val actual: String = finder.prefix(strings)
+            val exp: String = expected[index]
             assertEquals(exp, actual)
         }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun `test incorrect input`() {
-        val arrayValidator = FakeValidator(result = false)
+        val arrayValidator = FakeWordValidator(result = false)
         val finder = PrefixFinder.Base(validator = arrayValidator)
         val input = listOf(
             arrayOf("cat5", "ta5ka", "1rat"),
@@ -72,7 +72,7 @@ class PrefixFinderTest {
     }
 }
 
-private class FakeValidator(private val result: Boolean = true) : ArrayValidator {
-
+private class FakeWordValidator(private val result: Boolean = true) : ArrayValidator {
+    
     override fun isValid(strings: Array<String>): Boolean = result
 }
