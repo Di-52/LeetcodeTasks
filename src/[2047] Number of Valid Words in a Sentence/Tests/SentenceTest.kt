@@ -83,7 +83,7 @@ class SentenceTest {
             0,
             49
         )
-        
+
         inputs.forEachIndexed { index, string ->
             assertEquals(expected[index], sentence.validWords(string = string))
         }
