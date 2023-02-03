@@ -23,13 +23,14 @@ class SentenceTest {
             2,
             1
         )
+
         inputs.forEachIndexed { index, string ->
             assertEquals(expected[index], sentence.validWords(string = string))
         }
     }
 
     @Test
-    fun `test fake invalid`(){
+    fun `test fake invalid`() {
         val validator: WordValidator = FakeValidator(false)
         val sentence: Sentence = Sentence.Base(validator = validator)
         val inputs = listOf(
@@ -40,13 +41,13 @@ class SentenceTest {
         )
         val expected = 0
 
-        inputs.forEachIndexed { index, string ->
-            assertEquals(expected, sentence.validWords(string = string))
+        inputs.forEach {
+            assertEquals(expected, sentence.validWords(string = it))
         }
     }
 
     @Test
-    fun `test real`(){
+    fun `test real`() {
         val validator = WordValidator.Base()
         val sentence: Sentence = Sentence.Base(validator = validator)
         val inputs = listOf(
@@ -82,6 +83,7 @@ class SentenceTest {
             0,
             49
         )
+        
         inputs.forEachIndexed { index, string ->
             assertEquals(expected[index], sentence.validWords(string = string))
         }
